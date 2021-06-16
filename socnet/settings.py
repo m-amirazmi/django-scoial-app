@@ -80,6 +80,18 @@ WSGI_APPLICATION = 'socnet.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'de488c457nou95',
+        'USER': 'adiuhvrinmphym',
+        'PASSWORD': '50b34cf943cce9adb25b5e1dd14ed908d8ed539377b00ade7a3ae0ddd63b79b6',
+        'HOST': 'ec2-34-232-191-133.compute-1.amazonaws.com',
+        'PORT': '5432',
+        'URI': 'postgres://adiuhvrinmphym:50b34cf943cce9adb25b5e1dd14ed908d8ed539377b00ade7a3ae0ddd63b79b6@ec2-34-232-191-133.compute-1.amazonaws.com:5432/de488c457nou95',
+        'HEROKU_CLI': 'heroku pg:psql postgresql-shallow-04437 --app django-twitclone-app'
+    }
+}
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.postgresql',
@@ -90,12 +102,12 @@ WSGI_APPLICATION = 'socnet.wsgi.application'
 #     }
 # }
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
 
 
 # Password validation
