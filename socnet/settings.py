@@ -24,9 +24,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-!frshqt5w_yroy0ypitkv^%5*90od8=dp@*-(3sxp3#_&*)bvb'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['django-twitclone-app.herokuapp.com', '127.0.0.1']
 
 
 # Application definition
@@ -79,13 +79,20 @@ WSGI_APPLICATION = 'socnet.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'socnet',
+#         'USER': 'amer',
+#         'PASSWORD': '5391',
+#         'HOST': 'localhost'
+#     }
+# }
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'socnet',
-        'USER': 'amer',
-        'PASSWORD': '5391',
-        'HOST': 'localhost'
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 
