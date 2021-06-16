@@ -18,6 +18,11 @@
     {% if 'register' not in request.path and 'login' not in request.path %}
     <section class="container">
         <div class="row">
+
+            <div id="top-bar">
+                {% include 'partials/_topnav.html' %}
+            </div>
+
             <!-- SIDEBAR -->
             <div id="left-sidebar" class="col-md-2">
                 {% include 'partials/_sidebar.html' %}
@@ -40,13 +45,28 @@
     </section>
     {% endif %}
 
+    <!--     
+            const titleHome = document.getElementById('title-home')
+            const titleEditPost = document.getElementById('title-post-edit')
+            const titleProfile = document.getElementById('title-profile')
+            const titleProfileOther = document.getElementById('title-profile-other') -->
 
+    <!-- titleHome.classList.add('d-none')
+            titleEditPost.classList.add('d-none')
+            titleProfile.classList.add('d-none')
+            titleProfileOther.classList.add('d-none') -->
     <script>
         const left = document.getElementById('left-sidebar')
         const right = document.getElementById('right-sidebar')
+        const topBar = document.getElementById('top-bar')
+
+        topBar.classList.add('d-none')
+
         if (window.innerWidth < 700) {
             left.classList.add('d-none')
             right.classList.add('d-none')
+            topBar.classList.remove('d-none')
+
         }
     </script>
 
