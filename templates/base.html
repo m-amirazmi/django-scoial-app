@@ -19,7 +19,7 @@
     <section class="container">
         <div class="row">
             <!-- SIDEBAR -->
-            <div class="col-md-2">
+            <div id="left-sidebar" class="col-md-2">
                 {% include 'partials/_sidebar.html' %}
             </div>
 
@@ -33,7 +33,7 @@
                 {% if 'register' not in request.path and 'login' not in request.path %}
             </div>
             <!-- RIGHT SIDE -->
-            <div class="col-md-3">
+            <div id="right-sidebar" class="col-md-3">
                 {% include 'partials/_rightside.html' %}
             </div>
         </div>
@@ -41,7 +41,14 @@
     {% endif %}
 
 
-
+    <script>
+        const left = document.getElementById('left-sidebar')
+        const right = document.getElementById('right-sidebar')
+        if (window.innerWidth < 700) {
+            left.classList.add('d-none')
+            right.classList.add('d-none')
+        }
+    </script>
 
 
 

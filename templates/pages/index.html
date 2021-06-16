@@ -12,7 +12,7 @@
         <form action="{% url 'posts-create' %}" method="POST">
             {% csrf_token %}
             <div class="row">
-                <div class="col-md-1 ps-4 my-3 align-self-center">
+                <div class="col-md-1 ps-4 my-3 align-self-center d-md-block d-none">
                     <img src="{% static 'images/avatar.png' %}" class="border rounded-circle" alt=" avatar.png" width="50px">
                 </div>
                 <div class="col-md-9 ps-4">
@@ -20,7 +20,7 @@
                         <textarea class="post form-control" name="post" placeholder="What's your today DIY idea?"></textarea>
                     </div>
                 </div>
-                <div class="col-md-2 my-3 ps-1 pe-4">
+                <div class="col-md-2 my-3 px-4 ps-md-1 pe-md-4">
                     <button type="submit" class="btn btn-outline-primary rounded-3 w-100 h-100">Post</button>
                 </div>
             </div>
