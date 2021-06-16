@@ -6,6 +6,6 @@ urlpatterns = [
     path('login/', login, name='login'),
     path('logout/', logout, name='logout'),
     path('profile/', showProfile, name='profile'),
-    path('profile/<str:user_pk>/', showOtherProfile, name='profile-other'),
+    path('profile/other/<str:user_pk>/', showOtherProfile, name='profile-other'),
     path('profile/create/', editProfile, name='profile-edit')
 ]

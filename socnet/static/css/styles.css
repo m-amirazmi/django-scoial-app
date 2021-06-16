@@ -80,16 +80,15 @@ body.auth {
     cursor: pointer;
 }
 
-.post-reaction i,
-.post-reaction span {
+.post-reaction .icon {
     color: rgb(131, 131, 131);
 }
 
-.post-reaction i {
+.post-reaction i.icon {
     cursor: pointer;
 }
 
-.post-reaction span {
+.post-reaction span.icon {
     font-size: 0.9rem;
 }
 
@@ -144,4 +143,22 @@ body.auth {
 #profile .owner-detail p:last-child {
     color: rgb(131, 131, 131);
     font-size: 0.9rem;
+}
+
+.comments li {
+    background-color: #eeeeee;
+}
+
+.comment-item {
+    font-weight: 600;
+}
+
+.comment-item small:nth-child(2),
+.comment-item .time {
+    font-weight: normal;
+    color: rgb(131, 131, 131);
+}
+
+.comment-item .edit {
+    color: var(--bs-dark);
 }

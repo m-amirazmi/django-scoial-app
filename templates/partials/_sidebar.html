@@ -13,7 +13,7 @@
             <i class="bi bi-house-door"></i>
             <span class="ms-2">Home</span>
         </a>
-        <a href="" class="my-3 text-decoration-none
+        <!-- <a href="" class="my-3 text-decoration-none
             {% if 'explore' in request.path %}
             active
             {% endif %}
@@ -36,7 +36,7 @@
         ">
             <i class="bi bi-bookmark"></i>
             <span class="ms-2">Bookmarks</span>
-        </a>
+        </a> -->
         <a href="{% url 'profile' %}" class="my-3 text-decoration-none
             {% if 'profile' in request.path %}
             active
@@ -46,9 +46,9 @@
             <span class="ms-2">Profile</span>
         </a>
     </div>
-    <div class="my-3">
+    <a href="{% url 'index' %}" class="my-3">
         <button class="btn btn-outline-primary rounded-pill">Post</button>
-    </div>
+    </a>
     <div class="d-flex mt-auto align-items-center">
         <div>
             <img src="{% static 'images/avatar.png' %}" alt="" width="45px" class="border rounded-pill">

@@ -145,3 +145,7 @@ body.auth {
     color: rgb(131, 131, 131);
     font-size: 0.9rem;
 }
+
+.comment-item small:first {
+    font-size: 600;
+}

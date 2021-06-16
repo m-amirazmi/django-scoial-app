@@ -60,19 +60,44 @@
                     <div class="post-content">
                         {{ post.post }}
                     </div>
-                    <div class="post-reaction mt-2 d-flex justify-content-start">
-                        <p class="m-0 pe-5 pt-2 ">
-                            <i class=" bi bi-chat-square-text"></i>
-                            <span>209 comments</span>
+                    <!-- COMMENTS -->
+                    <div class="post-reaction mt-2 justify-content-start">
+                        <p class="m-0 pe-5 pt-2" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_{{ post.id }}" aria-expanded="false" aria-controls="collapse_{{ post.id }}">
+                            <i class="icon bi bi-chat-square-text"></i>
+                            <span class="icon">Comments</span>
                         </p>
-                        <!-- <p class="m-0 pe-5 pt-2 ">
-                            <i class=" bi bi-star"></i>
-                            <span>102 likes</span>
-                        </p>
-                        <p class="m-0 pe-5 pt-2 ">
-                            <i class=" bi bi-bookmark-plus"></i>
-                            <span>save</span>
-                        </p> -->
+                        <div class="collapse" id="collapse_{{ post.id }}">
+                            <div class="card border border-primary">
+                                <form action="{% url 'comments-create' post.id %}" method="POST">
+                                    {% csrf_token %}
+                                    <div class="my-3 mx-3">
+                                        <input class="comment form-control" name="comment" placeholder="What's your comment?">
+                                    </div>
+                                </form>
+                                <ul class="comments list-group">
+                                    {% for comment in comments %}
+                                    {% if comment.post.id == post.id %}
+                                    <li class="list-group-item">
+                                        <div class="comment-item d-flex flex-row align-items-center">
+                                            <div>
+                                                <a {% if user.id != comment.owner.id %} href="{% url 'profile-other' comment.owner.id %}" {% else %} href="{% url 'profile' %}" {% endif %} class="text-decoration-none"><small>{{ comment.owner.first_name }} {{ comment.owner.last_name }}</small></a>
+                                                <small>@{{ comment.owner.username }}</small>
+                                            </div>
+                                            <div class="time ms-auto">
+                                                <small>{{ comment.date_created }} | {{ comment.date_created | timesince }}</small>
+                                            </div>
+
+                                        </div>
+                                        <div>
+                                            {{ comment.text }}
+                                        </div>
+
+                                    </li>
+                                    {% endif %}
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
