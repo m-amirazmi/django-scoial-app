@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load humanize %}
+
+{% block content %}
+<div class="border border-top-0 border-bottom-0 border-secondary" id="content">
+    <div class="p-3 page-title border-secondary border-bottom">
+        <h4 class="m-0">Home</h4>
+    </div>
+
+    <div class="post-input border-secondary border-bottom">
+        <form action="{% url 'posts-create' %}" method="POST">
+            {% csrf_token %}
+            <div class="row">
+                <div class="col-md-1 ps-4 my-3 align-self-center">
+                    <img src="{% static 'images/avatar.png' %}" class="border rounded-circle" alt=" avatar.png" width="50px">
+                </div>
+                <div class="col-md-9 ps-4">
+                    <div class="my-3">
+                        <textarea class="post form-control" name="post" placeholder="What's your today DIY idea?"></textarea>
+                    </div>
+                </div>
+                <div class="col-md-2 my-3 ps-1 pe-4">
+                    <button type="submit" class="btn btn-outline-primary rounded-3 w-100 h-100">Post</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="border-secondary border-bottom" style="height: 10px; background:rgba(233, 232, 232, 0.5);">
+    </div>
+
+    <div class="post-list">
+
+        {% for post in posts %}
+        <div class="post-item px-2 py-3 border-secondary border-bottom">
+            <div class="row">
+
+                <div class="post-owner-img col-md-1">
+                    <img src="{% static 'images/avatar.png' %}" class="border rounded-circle" alt=" avatar.png" width="50px">
+                </div>
+
+                <div class="col-md-11 pe-4">
+                    <div class="post-owner d-flex flex-row">
+                        <p class="mb-2">
+                            <a {% if user.id != post.owner.id %} href="{% url 'profile-other' post.owner.id %}" {% else %} href="{% url 'profile' %}" {% endif %} class="text-decoration-none">
+                                <span>{{ post.owner.first_name }} {{ post.owner.last_name }}</span>
+                                <span>@{{ post.owner.username }}</span>
+                            </a>
+                            <span> | {{ post.date_created | timesince }}</span>
+                        </p>
+                        {% if post.owner.id == user.id %}
+                        <p class="mb-2 ms-auto">
+                            <div class="btn-group">
+                                <button type="button" class="btn p-0 m-0" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
+                                    <i class="bi bi-three-dots"></i>
+                                </button>
+                                <ul class="dropdown-menu dropdown-menu-end">
+                                    <li>
+                                        <a class="dropdown-item" href="{% url 'posts-edit' post.id %}">
+                                            <i class="bi bi-pencil-square"></i>
+                                            <span>Edit</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item text-danger" href="{% url 'posts-delete' post.id %}">
+                                            <i class="bi bi-trash"></i>
+                                            <span>Remove</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </p>
+                        {% endif %}
+                    </div>
+                    <div class="post-content">
+                        {{ post.post }}
+                    </div>
+                    <div class="post-reaction mt-2 d-flex justify-content-start">
+                        <p class="m-0 pe-5 pt-2 ">
+                            <i class=" bi bi-chat-square-text"></i>
+                            <span>209 comments</span>
+                        </p>
+                        <!-- <p class="m-0 pe-5 pt-2 ">
+                            <i class=" bi bi-star"></i>
+                            <span>102 likes</span>
+                        </p> -->
+                        <!-- <p class="m-0 pe-5 pt-2 ">
+                            <i class=" bi bi-bookmark-plus"></i>
+                            <span>save</span>
+                        </p> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

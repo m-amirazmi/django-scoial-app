@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load humanize %}
+
+{% block content %}
+<div class="border border-top-0 border-bottom-0 border-secondary" id="profile">
+    <div class="p-3 page-title border-secondary border-bottom">
+        <h4 class="m-0">Edit Post</h4>
+    </div>
+
+    <div class="cover border-bottom border-primary">
+        <img src="{% static 'images/cover.jpg' %}" alt="" width="100%" height="250px">
+    </div>
+
+    <div class="d-flex avatar px-3">
+        <div>
+            <img class="border border-primary rounded-circle" src="{% static 'images/avatar.png' %}" alt="" width="140px">
+        </div>
+        <!-- <div class="align-self-end ms-auto">
+            <button class="btn btn-outline-primary rounded-pill" data-bs-toggle="modal" data-bs-target="#editProfile">
+                <i class="bi bi-pencil-square"></i>
+                <span>Edit Profile</span>
+            </button>
+        </div> -->
+    </div>
+
+    <div class="owner-name px-3 mt-2">
+        <h5 class="m-0">{{ user.first_name }} {{ user.last_name }}</h5>
+        <p class="m-0">@{{ user.username }}</p>
+    </div>
+
+    <div class="owner-detail px-3 mt-2 border-secondary border-bottom">
+        <p class="m-0">{{ person.bio }}</p>
+        <!-- <small class="d-inline-flex border border-primary rounded-pill px-3 py-2 m-0">5 posts</small> -->
+    </div>
+
+    <div class="post-list">
+
+        <div class="post-item px-2 py-3 border-secondary border-bottom">
+            <form action="{% url 'posts-edit' post.id %}" method="POST">
+                {% csrf_token %}
+                <div class="row">
+                    <div class="col-md-10 ps-4">
+                        <div class="my-3">
+                            <textarea class="post form-control" name="post" placeholder="What's your today DIY idea?">{{ post.post }}</textarea>
+                        </div>
+                    </div>
+                    <div class="col-md-2 my-3 ps-1 pe-4">
+                        <button type="submit" class="btn btn-outline-primary rounded-3 w-100 h-100">Edit</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

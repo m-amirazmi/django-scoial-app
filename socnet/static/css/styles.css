@@ -1,0 +1,147 @@
+:root {
+    --bs-primary: #3C6E71;
+    --bs-secondary: #284B63;
+    --bs-tertiary: #15202B;
+    --bs-light: #D9D9D9;
+    --bs-dark: #353535;
+}
+
+body {
+    background-color: #fff;
+    color: var(--bs-dark);
+}
+
+body.auth {
+    background-color: var(--bs-secondary);
+}
+
+.auth .card {
+    max-width: 500px;
+}
+
+#navbar .nav-link {
+    font-size: 1rem;
+}
+
+#navbar .nav-link i {
+    font-size: 1.5rem;
+}
+
+#content {
+    /* min-height: 100vh; */
+}
+
+#content.border {
+    border-width: 0.5px !important;
+}
+
+#sidebar {
+    position: fixed;
+    height: 100vh;
+    padding: 30px 0px;
+}
+
+#sidebar .brand {
+    padding: 20px 0px;
+}
+
+#sidebar .links a {
+    font-size: 1.3rem;
+    color: var(--bs-dark);
+    font-weight: 600;
+    padding-left: 20px;
+}
+
+#sidebar .links a:hover {
+    font-size: 1.3rem;
+    color: var(--bs-primary);
+    font-weight: 600;
+}
+
+#sidebar .links a.active {
+    border-left: 2px solid var(--bs-primary);
+    color: var(--bs-primary);
+}
+
+#sidebar button {
+    width: 90%;
+}
+
+#sidebar p {
+    font-size: 0.9rem;
+}
+
+#sidebar p:last-child {
+    font-size: 0.9rem;
+    opacity: 0.5;
+}
+
+#sidebar .more {
+    cursor: pointer;
+}
+
+.post-reaction i,
+.post-reaction span {
+    color: rgb(131, 131, 131);
+}
+
+.post-reaction i {
+    cursor: pointer;
+}
+
+.post-reaction span {
+    font-size: 0.9rem;
+}
+
+.post-owner-img {
+    cursor: pointer;
+}
+
+.post-owner p span:nth-child(1),
+.post-owner p span:nth-child(2) {
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.post-owner p span:nth-child(2),
+.post-owner p span:nth-child(3) {
+    font-weight: 400;
+    color: rgb(131, 131, 131);
+}
+
+#rightside {
+    position: sticky;
+    top: 0;
+    padding: 50px 0px;
+}
+
+#rightside .right-post .right-post-item small {
+    color: rgb(131, 131, 131);
+}
+
+#rightside .right-post .right-post-item {
+    cursor: pointer;
+}
+
+#profile {
+    /* min-height: 100vh; */
+}
+
+#profile .cover img {
+    object-fit: cover;
+    cursor: pointer;
+}
+
+#profile .avatar img {
+    margin-top: -70px;
+    cursor: pointer;
+}
+
+#profile .owner-name p {
+    color: rgb(131, 131, 131);
+}
+
+#profile .owner-detail p:last-child {
+    color: rgb(131, 131, 131);
+    font-size: 0.9rem;
+}

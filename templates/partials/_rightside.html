@@ -1,0 +1,77 @@
+{% load static %}
+{% load humanize %}
+
+<div id="rightside" class="d-flex flex-column">
+
+    <!-- SEARCH POST -->
+    <form action="" method="POST">
+        <div class="mb-3">
+            <h5>Search Post</h5>
+            <input type="email" class="form-control" placeholder="Let's find interesting post...">
+        </div>
+    </form>
+
+    <!-- HOT POST -->
+    <div class="right-post border border-primary rounded-1 py-2">
+        <div class="right-post-title px-3">
+            {% if user.id == person.owner.id%}
+            <h5>My Hot Post</h5>
+            {% elif request.path == '/' %}
+            <h5>Hot Post</h5>
+            {% else %}
+            <h5>{{ person.owner.first_name }} Hot Post</h5>
+            {% endif %}
+        </div>
+
+        <div class="right-post-item border-top border-bottom-0 border-primary px-3 py-2">
+            <p class="m-0">Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta, autem.</p>
+            <div class="d-flex align-items-center w-100">
+                <small>209 likes</small>
+                <a href="" class="ms-auto">
+                    <i class="bi bi-three-dots"></i>
+                </a>
+            </div>
+        </div>
+        <div class="right-post-item border-top border-bottom-0 border-primary px-3 py-2">
+            <p class="m-0">Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta, autem.</p>
+            <div class="d-flex align-items-center w-100">
+                <small>209 likes</small>
+                <a href="" class="ms-auto">
+                    <i class="bi bi-three-dots"></i>
+                </a>
+            </div>
+        </div>
+        <div class="right-post-item border-top border-bottom-0 border-primary px-3 py-2">
+            <p class="m-0">Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta, autem.</p>
+            <div class="d-flex align-items-center w-100">
+                <small>209 likes</small>
+                <a href="" class="ms-auto">
+                    <i class="bi bi-three-dots"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+    <!-- LATEST POST -->
+    <div class="right-post border border-primary rounded-1 mt-3 py-2">
+        <div class="right-post-title px-3">
+            {% if user.id == person.owner.id%}
+            <h5>My Latest Post</h5>
+            {% elif request.path == '/' %}
+            <h5>Latest Post</h5>
+            {% else %}
+            <h5>{{ person.owner.first_name }} Latest Post</h5>
+            {% endif %}
+        </div>
+        {% for post in posts_filtered %}
+        <div class="right-post-item border-top border-bottom-0 border-primary px-3 py-2">
+            <p class="m-0">{{ post.post | slice:':70' }}...</p>
+            <div class="d-flex align-items-center w-100">
+                <small>{{ post.date_created | timesince }}</small>
+                <a href="" class="ms-auto">
+                    <i class="bi bi-three-dots"></i>
+                </a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>

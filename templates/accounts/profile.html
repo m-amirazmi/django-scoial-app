@@ -1,0 +1,180 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load humanize %}
+
+{% block content %}
+<div class="border border-top-0 border-bottom-0 border-secondary" id="profile">
+    <div class="p-3 page-title border-secondary border-bottom">
+        <h4 class="m-0">Profile</h4>
+    </div>
+
+    <div class="cover border-bottom border-primary">
+        <img src="{% static 'images/cover.jpg' %}" alt="" width="100%" height="250px">
+    </div>
+
+    <div class="d-flex avatar px-3">
+        <div>
+            <img class="border border-primary rounded-circle" src="{% static 'images/avatar.png' %}" alt="" width="140px">
+        </div>
+        <div class="align-self-end ms-auto">
+            <button class="btn btn-outline-primary rounded-pill" data-bs-toggle="modal" data-bs-target="#editProfile">
+                <i class="bi bi-pencil-square"></i>
+                <span>Edit Profile</span>
+            </button>
+        </div>
+    </div>
+
+    <div class="owner-name px-3 mt-2">
+        <h5 class="m-0">{{ user.first_name }} {{ user.last_name }}</h5>
+        <p class="m-0">@{{ user.username }}</p>
+    </div>
+
+    <div class="owner-detail px-3 mt-2 border-secondary border-bottom">
+        <p class="m-0">{{ person.bio }}</p>
+        <p class="d-flex">
+            <i class="bi bi-calendar3"></i>
+            <span class="ms-2">Joined {{ date_joined }}</span>
+            <span class="ms-auto">{{ posts_count }} posts</span>
+        </p>
+        <!-- <small class="d-inline-flex border border-primary rounded-pill px-3 py-2 m-0">5 posts</small> -->
+    </div>
+
+    <div class="post-list">
+
+        {% for post in posts %}
+        <div class="post-item px-2 py-3 border-secondary border-bottom">
+            <div class="row">
+
+                <div class="post-owner-img col-md-1">
+                    <img src="{% static 'images/avatar.png' %}" class="border rounded-circle" alt=" avatar.png" width="50px">
+                </div>
+
+                <div class="col-md-11 pe-4">
+                    <div class="d-flex flex-row post-owner">
+                        <p class="mb-2">
+                            <span>{{ post.owner.first_name }} {{ post.owner.last_name }}</span>
+                            <span>@{{ post.owner.username }}</span>
+                            <span> | {{ post.date_created | timesince }}</span>
+                        </p>
+                        <p class="mb-2 ms-auto">
+                            <div class="btn-group">
+                                <button type="button" class="btn p-0 m-0" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
+                                    <i class="bi bi-three-dots"></i>
+                                </button>
+                                <ul class="dropdown-menu dropdown-menu-end">
+                                    <li>
+                                        <a class="dropdown-item" href="{% url 'posts-edit' post.id %}">
+                                            <i class="bi bi-pencil-square"></i>
+                                            <span>Edit</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item text-danger" href="{% url 'posts-delete' post.id %}">
+                                            <i class="bi bi-trash"></i>
+                                            <span>Remove</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </p>
+
+
+
+                    </div>
+                    <div class="post-content">
+                        {{ post.post }}
+                    </div>
+                    <div class="post-reaction mt-2 d-flex justify-content-start">
+                        <p class="m-0 pe-5 pt-2 ">
+                            <i class=" bi bi-chat-square-text"></i>
+                            <span>209 comments</span>
+                        </p>
+                        <!-- <p class="m-0 pe-5 pt-2 ">
+                            <i class=" bi bi-star"></i>
+                            <span>102 likes</span>
+                        </p>
+                        <p class="m-0 pe-5 pt-2 ">
+                            <i class=" bi bi-bookmark-plus"></i>
+                            <span>save</span>
+                        </p> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <!-- Modal Edit Profile -->
+    <div class="modal fade" id="editProfile" tabindex="-1" aria-labelledby="editProfileLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editProfileLabel">Edit Profile</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form action="{% url 'profile-edit' %}" method="POST">
+                    <div class="modal-body">
+                        {% csrf_token %}
+                        <!-- <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="first_name" class="form-label">First Name</label>
+
+                                    <input type="text" name="first_name" value="{{ user.first_name }}" class="form-control" id="first_name">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="last_name" class="form-label">Last Name</label>
+                                    <input type="text" name="last_name" value="{{ user.last_name }}" class="form-control" id="last_name">
+                                </div>
+                            </div>
+                        </div> -->
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="phone" class="form-label">Phone Number</label>
+                                    <input type="text" name="phone" class="form-control" id="phone" value="{{ person.phone }}">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="gender" class="form-label">Gender</label>
+                                    <select id="gender" name="gender" class="form-select" value="{{ person.gender }}">
+                                        <option disabled {% if person.gender is None %} selected {% endif %}>Choose Your Gender</option>
+                                        <option {% if person.gender == 'male' %} selected {% endif %} value="male">Male</option>
+                                        <option {% if person.gender == 'female' %} selected {% endif %} value="female">Female</option>
+                                        <option {% if person.gender == 'other' %} selected {% endif %} value="other">Other</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="bio" class="form-label">Bio</label>
+                            <textarea name="bio" class="form-control" id="bio">{{ person.bio }}</textarea>
+                        </div>
+                        <!-- <div class="mb-3">
+                            <label for="{{ form.image_cover.id }}" class="form-label">Cover Image</label>
+                            <div>
+                                {{form.image_cover}}
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="{{ form.image_profile.id }}" class="form-label">Profile Image</label>
+                            <div>
+                                {{form.image_profile}}
+                            </div>
+                        </div> -->
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-outline-primary">Save changes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
